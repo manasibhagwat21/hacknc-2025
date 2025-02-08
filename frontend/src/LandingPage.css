@@ -1,0 +1,84 @@
+/* Basic reset and body styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fa;
+  color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .logo-img {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar .login .login-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.navbar .login .login-btn:hover {
+  background-color: #45a049;
+}
+
+/* Hero Section Styling */
+.hero-section {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.hero-section .tagline {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  animation: fadeIn 2s ease-in-out;
+  margin-bottom: 30px;
+}
+
+.hero-section .cta-btn {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.hero-section .cta-btn:hover {
+  background-color: #45a049;
+}
+
+/* Animation for tagline */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

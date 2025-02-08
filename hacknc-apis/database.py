@@ -16,3 +16,4 @@ async def get_next_user_id():
         return_document=True
     )
     return result["sequence_value"]
+

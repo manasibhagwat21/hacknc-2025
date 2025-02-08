@@ -8,6 +8,7 @@ from bson import ObjectId
 
 router = APIRouter()
 
+#API to create a community
 @router.post("/create", response_model=Community)
 async def create_community(community: Community):
     existing_community = await community_collection.find_one({"name": community.name})
@@ -22,6 +23,7 @@ async def create_community(community: Community):
     community_data["id"] = str(result.inserted_id)  
     return Community(**community_data)
 
+#API to join a community
 @router.post("/join")
 async def join_community(request: JoinCommunityRequest):
     # Check if community exists

@@ -6,6 +6,7 @@ from datetime import timedelta
 
 router = APIRouter()
 
+#API for signup
 @router.post("/signup", response_model=Token)
 async def signup(user: UserCreate):
     # Check if user already exists
@@ -29,6 +30,7 @@ async def signup(user: UserCreate):
 
     return {"access_token": access_token, "token_type": "bearer"}
 
+#API for login
 @router.post("/login", response_model=Token)
 async def login(user: UserLogin):
     db_user = await users_collection.find_one({"email": user.email})

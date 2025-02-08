@@ -24,19 +24,16 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
-
 class Community(BaseModel):
     name: str
     description: Optional[str] = None
-    creator_id: str  # User ID of the creator
-    members: List[str] = []  # List of User IDs
+    creator_id: str  
+    members: List[str] = []  
     
 class JoinCommunityRequest(BaseModel):
     user_id: int  
     community_name: str 
 
-
-
-
-
-    
+class UserSkillsUpdate(BaseModel):
+    user_id: int 
+    services: List[str]  

@@ -11,7 +11,7 @@ class UserCreate(BaseModel):
     bio: Optional[str] = None
     communities: List[str] = []  
     servicesOffer: List[str] = []  
-    servicesGive: List[str] = []  
+    servicesNeed: List[str] = []  
     
 class UserLogin(BaseModel):
     email: EmailStr
@@ -31,7 +31,9 @@ class Community(BaseModel):
     creator_id: str  # User ID of the creator
     members: List[str] = []  # List of User IDs
     
-
+class JoinCommunityRequest(BaseModel):
+    user_id: int  
+    community_name: str 
 
 
 

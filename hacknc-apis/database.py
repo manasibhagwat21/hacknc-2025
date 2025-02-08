@@ -8,6 +8,8 @@ database = client[DB_NAME]
 users_collection = database["users"]
 community_collection = database["communities"]
 counters_collection = database["counters"]
+posts_collection = database["posts"]
+comments_collection = database["comments"]
 
 async def get_next_user_id():
     result = await counters_collection.find_one_and_update(

@@ -3,7 +3,6 @@ from models import UserCreate, UserLogin, Token, Community
 from database import users_collection, community_collection
 from utils import hash_password, verify_password, create_access_token
 from datetime import timedelta
-import datetime
 
 router = APIRouter()
 
@@ -14,6 +13,7 @@ async def create_community(community: Community):
         raise HTTPException(status_code=400, detail="Community name already taken")
 
     community_data = community.dict()
+    community_data["created_at"] = datetime.utcnow().isoformat()
     community_data["members"] = [community.creator_id]
 
     # Insert into MongoDB

@@ -28,7 +28,7 @@ class Token(BaseModel):
 class Community(BaseModel):
     name: str
     description: Optional[str] = None
-    creator_name: str  # User ID of the creator
+    creator_id: str  # User ID of the creator
     members: List[str] = []  # List of User IDs
     
 

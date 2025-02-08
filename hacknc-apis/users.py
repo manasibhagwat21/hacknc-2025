@@ -44,7 +44,43 @@ async def get_user_skills(user_id: int):
 
     return {"user_id": user_id, "servicesOffer": user.get("servicesOffer", [])}
 
-# @router.get("/all-skills")
-# async def get_all_users_with_skills():
-#     users = await users_collection.find({"skills": {"$exists": True, "$not": {"$size": 0}}}).to_list(length=100)
-#     return [{"user_id": user["id"], "skills": user["skills"]} for user in users]
+
+#API for finding matches
+@router.get("/{user_id}/matches")
+async def find_matches(user_id: int):
+    # Find user by ID
+    user = await users_collection.find_one({"id": user_id})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    user_offers = user.get("servicesOffer", [])
+    user_needs = user.get("servicesNeed", [])
+
+    if not user_offers and not user_needs:
+        return {"message": "No services listed to match"}
+
+    # Find users whose `servicesNeed` match current user's `servicesOffer`
+    offers_matched_users = await users_collection.find({
+        "servicesNeed": {"$in": user_offers},
+        "id": {"$ne": user_id}  # Exclude self from results
+    }).to_list(length=100)
+
+    # Find users whose `servicesOffer` match current user's `servicesNeed`
+    needs_matched_users = await users_collection.find({
+        "servicesOffer": {"$in": user_needs},
+        "id": {"$ne": user_id}  # Exclude self from results
+    }).to_list(length=100)
+
+    # Format response
+    matched_users = {
+        "usersLookingForYourServices": [
+            {"user_id": match["id"], "username": match["username"], "needs": list(set(user_offers) & set(match["servicesNeed"]))}
+            for match in offers_matched_users
+        ],
+        "usersOfferingWhatYouNeed": [
+            {"user_id": match["id"], "username": match["username"], "offers": list(set(user_needs) & set(match["servicesOffer"]))}
+            for match in needs_matched_users
+        ]
+    }
+
+    return matched_users

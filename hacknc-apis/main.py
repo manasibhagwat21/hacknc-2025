@@ -19,8 +19,10 @@ app.add_middleware(
 @app.post("/chat")
 async def chat(chat_request: ChatRequest):
     try:
-        response = get_response(chat_request)
-        return {"response": response}
+        # response = get_response(chat_request)
+        # return {"response": response}
+        response = await get_response(chat_request)
+        return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

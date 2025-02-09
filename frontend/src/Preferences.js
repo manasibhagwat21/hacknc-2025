@@ -93,8 +93,9 @@ const Preferences = () => {
             <div className="overlay"></div>
             <span className="spann">{questions[index].right}</span>
           </button>
+          
         </div>
-      </div>
+      </div><br/>
     </div>
   );
 };

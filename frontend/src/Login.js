@@ -33,7 +33,7 @@ const Login = () => {
       console.log("User ID:", userId);
       
       // Redirect to Preferences Page after successful signup
-      navigate('/profilesetup');
+      navigate('/community');
     } catch (error) {
       setMessage(error.response?.data?.detail || 'Error signing up');
     }
@@ -83,7 +83,7 @@ const Login = () => {
             </div>
             <Link to="/community"> 
             {/* have to remove this link */}
-            <button type="submit" className="btn">Log In</button>
+            <button type="submit" onClick={handleSubmit} className="btn">Log In</button>
             </Link>
           </form>
           </div>

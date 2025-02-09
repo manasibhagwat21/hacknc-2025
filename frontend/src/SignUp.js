@@ -34,6 +34,9 @@ const SignUp = () => {
     try {
       const response = await axios.post('http://localhost:8000/auth/signup', formData);
       setMessage(response.data.message);
+      const userId = response.data.user_id; // Extract user ID from response
+      localStorage.setItem('userId', userId);
+      console.log("User ID:", userId);
       // Redirect to Preferences Page after successful signup
       if(response.data){
         navigate('/profilesetup');

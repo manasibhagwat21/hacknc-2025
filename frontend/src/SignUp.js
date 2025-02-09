@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.css';
+import signup from './images/signup.png';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    profile_pic: "",
-    bio: "",
-    communities: [],
-    servicesOffer: [],
-    servicesNeed: [] 
+    profile_pic: "",    
+    bio: "",
+    communities: [],
+    servicesOffer: [],
+    servicesNeed: [] 
   });
 
   const [message, setMessage] = useState('');
@@ -23,61 +24,80 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setMessage('');
 
-    try {
-      const response = await axios.post('http://localhost:8000/auth/signup', formData);
-      setMessage(response.data.message);
+//     try {
+//       const response = await axios.post('http://localhost:8000/auth/signup', formData);
+//       setMessage(response.data.message);
       
-      // Redirect to Preferences Page after successful signup
-      navigate('/preferences');
-    } catch (error) {
-      setMessage(error.response?.data?.detail || 'Error signing up');
-    }
-  };
+//       // Redirect to Preferences Page after successful signup
+//       navigate('/profilesetup');
+//     } catch (error) {
+//       setMessage(error.response?.data?.detail || 'Error signing up');
+//     }
+//   };
 
   return (
-    <div className="sign-up">
-      <h2>Create an Account</h2>
-      {message && <p className="message">{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+    
+    <div className='container'>
+      <nav className="navbar">
+          <div className="logo">
+            <img src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-shake-hands-png-image_8742463.png" alt="Handshake" className="logo-img" /> {/* Add your placeholder image here */}
+          </div>
+          <Link to="/login" className="login-btn">Log In </Link>
+      </nav>
+      <div className="sign-up-container">
+        <div className="left">
+          <img src="https://static.vecteezy.com/system/resources/previews/013/899/829/non_2x/girl-with-pointing-finger-vector.jpg" alt="Sign Up" className="sign-up-image" />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+        <div className="right">
+        <div className="sign-up">
+          <h2>Create an Account</h2>
+          {message && <p className="message">{message}</p>}
+          <form>
+          {/* <form onSubmit={handleSubmit}> */}
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <Link to="/profilesetup">
+            <button type="submit" className="btn">Sign Up</button>
+            </Link>
+          </form>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn">Sign Up</button>
-      </form>
+      </div>  
     </div>
   );
 };

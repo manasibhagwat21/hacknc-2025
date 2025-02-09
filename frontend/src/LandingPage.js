@@ -8,7 +8,7 @@ const LandingPage = () => {
     'Join the Deep Loop of Good Deeds!',
     'A community where every good action creates a ripple of positive change.',
   ];
-  
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTagline(prevTagline => 
@@ -24,21 +24,21 @@ const LandingPage = () => {
       {/* Navbar */}
       <nav className="navbar">
         <div className="logo">
-          <img src="handshake-placeholder.png" alt="Handshake" className="logo-img" /> {/* Add your placeholder image here */}
+          <img src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-shake-hands-png-image_8742463.png" alt="Handshake" className="logo-img" /> {/* Add your placeholder image here */}
         </div>
-        <Link to="/login">
-        <div className="login">
-          <button className="login-btn">Log In</button>
-        </div>
-        </Link>
+        <Link to="/login" className="login-btn">Log In </Link>
       </nav>
 
       {/* Hero Section */}
       <section className="hero-section">
-        <h1 className="tagline">{tagline}</h1>
+        <div className="overlay"></div> {/* Overlay for text readability */}
+        <div className="hero-text">
+        <h1 className="title">DeedL<span>∞</span>p</h1>
+        <h2 className="tagline">{tagline}</h2>
         <Link to="/signup">
-        <button className="cta-btn">Join the Movement!</button>
+          <button className="cta-btn">Join the Movement!</button>
         </Link>
+        </div>
       </section>
     </div>
   );

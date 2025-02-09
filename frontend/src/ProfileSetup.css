@@ -1,0 +1,150 @@
+/* Scoped Styling for .profile-setup */
+.profile-setup {
+  display: flex;
+  height: 100vh;
+  background:  #e9e5ff;
+  animation: gradientAnimationProfile 6s ease infinite;
+}
+
+/* Left 40% - Image Display */
+.profile-setup .image-container {
+  flex: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #b5a8ff;
+  padding: 20px;
+  border-radius: 100%;
+  animation: slideInLeftProfile 1.2s ease-in-out;
+}
+
+.profile-setup .profile-preview {
+  width: 80%;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid #E4F1EE;
+  transition: transform 0.5s ease;
+}
+
+.profile-setup .profile-preview:hover {
+  transform: scale(1.1);
+}
+
+/* Right 60% - Form */
+.profile-setup .form-container {
+  flex: 60%;
+  padding: 40px 50px;
+  background: #b5a8ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 15px 15px 0;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  animation: slideInRightProfile 1.2s ease-in-out;
+}
+
+.profile-setup h2 {
+  color: #DEDAF4;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeInProfile 2s ease;
+}
+
+.profile-setup .form-group {
+  width: 100%;
+  margin-bottom: 15px;
+  animation: fadeInUpProfile 1s ease-in-out;
+}
+
+.profile-setup .form-group label {
+  display: block;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-setup .form-group input,
+.profile-setup .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.profile-setup .form-group input[type="file"] {
+  padding: 0;
+  font-size: 14px;
+}
+
+.profile-setup .form-group textarea {
+  height: 120px;
+}
+
+.profile-setup .form-group input:focus,
+.profile-setup .form-group textarea:focus {
+  outline: none;
+  border-color: #FFD6A5;
+}
+
+.profile-setup button {
+  width: 100%;
+  padding: 12px;
+  background-color: #b5a8ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: buttonBounceProfile 1s ease infinite;
+}
+
+.profile-setup button:hover {
+  background-color: #FFD6A5;
+}
+
+/* Keyframes Scoped for Profile */
+
+
+@keyframes slideInRightProfile {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInProfile {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUpProfile {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonBounceProfile {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

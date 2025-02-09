@@ -1,84 +1,117 @@
-/* Basic reset and body styling */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fa;
-  color: #333;
-}
-
-/* Navbar Styling */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.navbar .logo {
-  display: flex;
-  align-items: center;
-}
-
-.navbar .logo-img {
-  width: 50px;
-  height: 50px;
-}
-
-.navbar .login .login-btn {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.navbar .login .login-btn:hover {
-  background-color: #45a049;
-}
-
-/* Hero Section Styling */
-.hero-section {
-  text-align: center;
-  margin-top: 100px;
-}
-
-.hero-section .tagline {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #333;
-  animation: fadeIn 2s ease-in-out;
-  margin-bottom: 30px;
-}
-
-.hero-section .cta-btn {
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  color: white;
-  background-color: #4CAF50;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.hero-section .cta-btn:hover {
-  background-color: #45a049;
-}
-
-/* Animation for tagline */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
+.LandingPage {
+    font-family: 'Arial', sans-serif;
   }
-  100% {
-    opacity: 1;
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0px 2%;
+    background-color: #FFADAD;
+    position: relative;
+    z-index: 3;
   }
+  
+  .logo-img {
+    height: 60px; /* Adjust as needed */
+  }
+  
+  .login-btn {
+    background-color: transparent;
+    font-size: 1.2rem; /* Slightly larger font size */
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 10px 20px; /* Increased padding for a nicer button size */
+    font-family: 'Poppins', sans-serif; /* Clean, modern font */
+    font-weight: 600; /* Bold text for emphasis */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    text-decoration: none;
+  }
+  
+  .login-btn:hover {
+    background-color: white; /* Light background on hover */
+    color: #333; /* Dark text on hover */
+    border-color: #333; /* Dark border on hover */
+  }
+  
+  
+  .hero-section {
+    margin-top: -60px; /* Offset the navbar height */
+    position: relative;
+    height: 100vh;
+    background: url('https://s24179.pcdn.co/wp-content/uploads/Building-your-community-featyred-image-1076x500-news.gif') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 0; /* Ensures that the hero section is the lowest layer */
 }
+
+.hero-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 209, 220, 0.622); /* Light pink overlay */
+    z-index: 1; /* Place overlay above the background */
+}
+
+.hero-text{
+    display: flex;
+    flex-direction: column;
+}
+
+span
+{
+    font-size: 8rem;
+    font-weight: lighter;
+}
+
+.title {
+    color: black; /* Text color */
+    font-size: 8rem; /* Increase font size */
+    font-family: 'Poppins', sans-serif; /* Clean, modern font */
+    font-weight: 600; /* Slightly bolder for emphasis */
+    margin: 0;
+    position: relative;
+    z-index: 2; /* Text appears above the overlay */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Soft shadow to make the text stand out */
+    letter-spacing: 2px; /* Slightly spaced letters for a more refined look */
+}
+  
+  .tagline {
+    font-size: 1.5rem;
+    margin-top: -10px;
+    font-weight: normal;
+    color: black;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .cta-btn {
+    font-size: 16px; /* Font size in pixels */
+    width: 200px; /* Fixed width of the button */
+    height: 50px; /* Fixed height of the button */
+    padding: 0; /* Remove padding as width and height are defined */
+    background-color: #fe6f6f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px; /* Add space between the tagline and button */
+    text-align: center; /* Ensure the text is centered */
+    position: relative;
+    z-index: 2;
+  }
+  
+  .cta-btn:hover {
+    background-color: #ff523b;
+  }
+  

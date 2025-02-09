@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom
 import LandingPage from './LandingPage'; 
 import SignUp from './SignUp';
 import Login from './Login';
+import ProfileSetup from './ProfileSetup';
 import Preferences from './Preferences';
 import Home from './Home';
 
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/preferences" element={<Preferences />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/profilesetup" element={<ProfileSetup />} />
       </Routes>
     </Router>
   );

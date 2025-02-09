@@ -1,0 +1,156 @@
+.profile-page {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navb {
+    display: flex;
+    /* align-items: center; */
+    height: 60px;
+    padding: 0px 2%;
+    background-color: rgb(235, 190, 189);
+    position: relative;
+    z-index: 3;
+  }
+
+  .serviceshare-link {
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    background-color: gray;
+    text-decoration: solid;
+    margin: 30px;
+    padding: 20px;
+  }
+  
+.navb .profile {
+    margin-left: auto;
+    margin-right: 40px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.lo{
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    background-color: rgb(208, 229, 171);
+    text-decoration: solid;
+    margin: -23px;
+    padding: 20px;
+}
+
+  .profile-info {
+    text-align: center;
+  }
+  
+  .profile-pic {
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .usern {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .bio {
+    font-size: 20px;
+    color: #555;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .invites {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .invite-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .invite-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .invite-card p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .join-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .join-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .invite-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.accept-btn, .decline-btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+}
+
+.accept-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.accept-btn:hover {
+    background-color: #45a049;
+}
+
+.decline-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.decline-btn:hover {
+    background-color: #e53935;
+}

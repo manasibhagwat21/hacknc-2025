@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+.profile-setup {
+  display: flex;
+  height: 100vh;
+  background:  #fcc8c8;
+  animation: gradientAnimationProfile 6s ease infinite;
+}
+
+h1{
+  font-family: 'Poppins', sans-serif;
+  font-size: 5rem;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* Left 40% - Image Display */
+.profile-setup .image-container {
+  flex: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:  #fcc8c8;
+  padding: 20px;
+
+  animation: slideInLeftProfile 1.2s ease-in-out;
+}
+
+.profile-setup .profile-preview {
+  width: 80%;
+  height: auto;
+  border: 5px solid  #fcc8c8;
+  transition: transform 0.5s ease;
+}
+
+.profile-setup .profile-preview:hover {
+  transform: scale(1.1);
+}
+
+/* Right 60% - Form */
+.profile-setup .form-container {
+  flex: 60%;
+  padding: 40px 50px;
+  background: #ffadad;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 15px 15px 0;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  animation: slideInRightProfile 1.2s ease-in-out;
+}
+
+.profile-setup {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  background: #fcc8c8;
+  animation: gradientAnimationProfile 6s ease infinite;
+  overflow: hidden; /* Prevent scrolling on the main screen */
+}
+
+.profile-setup .form-container {
+  flex: 60%;
+  padding: 40px 50px;
+  background: #ffadad;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items at the top */
+  align-items: center;
+  border-radius: 0 15px 15px 0;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  animation: slideInRightProfile 1.2s ease-in-out;
+  
+  height: 100vh; /* Full height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #ff6565 transparent; /* Optional styling */
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.profile-setup .form-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile-setup .form-container::-webkit-scrollbar-thumb {
+  background-color: #ff6565;
+  border-radius: 10px;
+}
+
+.profile-setup .form-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+#save{
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  background-color: #ff6565;
+}
+
+#save:hover{
+  background-color: #ff5353;
+}
+
+.enter{
+  margin-bottom: 30px;
+}
+
+.skip{
+  color: rgb(66, 65, 65);
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  background-color: transparent;
+  border: none;
+  text-align: right;
+}
+
+.skip:hover{
+  color: #000000;
+  background-color: transparent;
+}
+
+/* .btn{
+  width: 500px !important;
+  padding: 10px;
+  background-color: #FFD6A5;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+} */
+
+/* Keyframes Scoped for Profile */
+
+
+@keyframes slideInRightProfile {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInProfile {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUpProfile {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

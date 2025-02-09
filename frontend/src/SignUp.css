@@ -1,0 +1,126 @@
+/* General styling for the container */
+.container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navbar styling */
+.navb{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color:  rgb(235, 190, 189);
+    color: rgb(3, 0, 0);
+    padding: 0 20px;
+}
+
+.navbar .logo img {
+    height: 40px;
+}
+
+.navbar .login-btn {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Main content styling */
+.sign-up-container {
+    background-color: rgb(244, 237, 227);
+    display: flex;
+    flex: 1;
+    opacity: 0; /* Start with invisible */
+    animation: fadeInAnimation 1.5s forwards; /* Apply fade-in effect */
+}
+
+.left, .right {
+    width: 50%;
+    height: 100%;
+}
+
+.left {
+    background-color:rgb(244, 237, 227);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-image {
+    max-width: 100%;
+    height: auto;
+    transform: scaleX(-1);
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(244, 237, 227);
+}
+
+.sign-up {
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sign-up h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 93%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 99%;
+    /* padding: 10px; */
+    background-color: #a3ef9f;
+    color: rgb(0, 0, 0);
+    border: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transform: none; 
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.message {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Fade-in Animation for the sign-up container */
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0; /* Start invisible */
+    }
+    100% {
+        opacity: 1; /* Fully visible */
+    }
+}

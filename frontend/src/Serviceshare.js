@@ -60,101 +60,115 @@ const Serviceshare = () => {
     }
   };
 
-return (
+  const handleRequest = async (receiver_id) => {
+    try {
+      await axios.post("http://localhost:8000/requests/send-request", {
+        sender_id: user_id,
+        receiver_id: receiver_id,
+      });
+      console.log(`Request sent to user with ID: ${receiver_id}`);
+    } catch (error) {
+      console.error("Error sending request:", error);
+    }
+  };
+
+  return (
     <div>
-        <nav className="navb">
-            <div className="logo">
-                <img 
-                    src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-shake-hands-png-image_8742463.png" 
-                    alt="Handshake" 
-                    className="logo-img"
-                />
-            </div>
-        </nav>
-
-        <div className="serviceshare-container">
-            <div className="intro-section">
-                <div className={`flip-card ${flip ? "flipping" : ""}`}>
-                    <div className="flip-card-inner">
-                        <div className="flip-card-front">
-                            <h2>{introLines[currentIndex]}</h2>
-                        </div>
-                        <div className="flip-card-back">
-                            <h2>{introLines[(currentIndex + 1) % introLines.length]}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="service-section">
-                <h2>I am looking for someone to do:</h2>
-                <div className="service-bubbles">
-                    {services.map((service, index) => (
-                        <div
-                            key={index}
-                            className={`bubble ${selectedServices.includes(service) ? "selected" : ""}`}
-                            onClick={() => handleServiceClick(service)}
-                        >
-                            {service}
-                        </div>
-                    ))}
-                </div>
-                <button className="enter" onClick={handleSubmit}>Enter</button>
-            </div>
-
-            {matches && (
-                <div className="matches-section">
-                    <h2>Matches Found</h2>
-
-                    <div className="matches-container">
-                        {/* Left Section - People Looking for Your Services */}
-                        <div className="match-category">
-                            <h3>People Looking for Your Services</h3>
-                            {matches.usersLookingForYourServices.length > 0 ? (
-                                <ul>
-                                    {matches.usersLookingForYourServices.map((user) => (
-                                        <li key={user.user_id} className="user-card">
-                                            <div className="user-avatar">{user.username[0]}</div>
-                                            <div className="user-info">
-                                                <strong>{user.username}</strong>
-                                                <p>Needs: {user.needs.join(", ")}</p>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p>No matches found.</p>
-                            )}
-                            <p className="funky-text">🔥 You're in demand! 🔥</p>
-                        </div>
-
-                        {/* Right Section - People Offering What You Need */}
-                        <div className="match-category">
-                            <h3>People Offering What You Need</h3>
-                            {matches.usersOfferingWhatYouNeed.length > 0 ? (
-                                <ul>
-                                    {matches.usersOfferingWhatYouNeed.map((user) => (
-                                        <li key={user.user_id} className="user-card">
-                                            <div className="user-avatar">{user.username[0]}</div>
-                                            <div className="user-info">
-                                                <strong>{user.username}</strong>
-                                                <p>Offers: {user.offers.join(", ")}</p>
-                                                <div className="req">Request 📩 </div>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p>No matches found.</p>
-                            )}
-                            <p className="funky-text">✨ Perfect matches await! ✨</p>
-                        </div>
-                    </div>
-                </div>
-            )}
+      <nav className="navb">
+        <div className="logo">
+          <img 
+            src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-shake-hands-png-image_8742463.png" 
+            alt="Handshake" 
+            className="logo-img"
+          />
         </div>
+      </nav>
+
+      <div className="serviceshare-container">
+        <div className="intro-section">
+          <div className={`flip-card ${flip ? "flipping" : ""}`}>
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
+                <h2>{introLines[currentIndex]}</h2>
+              </div>
+              <div className="flip-card-back">
+                <h2>{introLines[(currentIndex + 1) % introLines.length]}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="service-section">
+          <h2>I am looking for someone to do:</h2>
+          <div className="service-bubbles">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className={`bubble ${selectedServices.includes(service) ? "selected" : ""}`}
+                onClick={() => handleServiceClick(service)}
+              >
+                {service}
+              </div>
+            ))}
+          </div>
+          <button className="enter" onClick={handleSubmit}>Enter</button>
+        </div>
+
+        {matches && (
+          <div className="matches-section">
+            <h2>Matches Found</h2>
+
+            <div className="matches-container">
+              {/* Left Section - People Looking for Your Services */}
+              <div className="match-category">
+                <h3>People Looking for Your Services</h3>
+                {matches.usersLookingForYourServices.length > 0 ? (
+                  <ul>
+                    {matches.usersLookingForYourServices.map((user) => (
+                      <li key={user.user_id} className="user-card">
+                        <div className="user-avatar">{user.username[0]}</div>
+                        <div className="user-info">
+                          <strong>{user.username}</strong>
+                          <p>Needs: {user.needs.join(", ")}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No matches found.</p>
+                )}
+                <p className="funky-text">🔥 You're in demand! 🔥</p>
+              </div>
+
+              {/* Right Section - People Offering What You Need */}
+              <div className="match-category">
+                <h3>People Offering What You Need</h3>
+                {matches.usersOfferingWhatYouNeed.length > 0 ? (
+                  <ul>
+                    {matches.usersOfferingWhatYouNeed.map((user) => (
+                      <li key={user.user_id} className="user-card">
+                        <div className="user-avatar">{user.username[0]}</div>
+                        <div className="user-info">
+                          <strong>{user.username}</strong>
+                          <p>Offers: {user.offers.join(", ")}</p>
+                          <div className="req" onClick={() => handleRequest(user.user_id)}>
+                            Request 📩
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No matches found.</p>
+                )}
+                <p className="funky-text">✨ Perfect matches await! ✨</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-);
+  );
 };
 
 export default Serviceshare;

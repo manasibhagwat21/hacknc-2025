@@ -8,7 +8,7 @@ const ProfileSetup = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [bio, setBio] = useState("");
   const [previewURL, setPreviewURL] = useState("");
-  const userId = 6; // Replace with actual user ID
+  const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {

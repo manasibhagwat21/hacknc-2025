@@ -12,6 +12,7 @@ const Profile = () => {
 
     // State to store invites
     const [invites, setInvites] = useState([]);
+    const userId = localStorage.getItem('userId');
 
     // Fetch received requests (invites) when the component mounts
     useEffect(() => {

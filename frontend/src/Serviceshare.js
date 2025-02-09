@@ -34,7 +34,7 @@ const Serviceshare = () => {
     "Laundry folding", "Gardening", "Massage therapy", "Recycling pick-up", "Carpooling", "Event planning"
   ];
 
-  const user_id = 6; // Replace with actual logged-in user ID
+  const userId = localStorage.getItem('userId');
 
   const handleServiceClick = (service) => {
     setSelectedServices((prevServices) =>

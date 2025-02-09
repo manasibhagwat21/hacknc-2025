@@ -1,10 +1,11 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from chatbot import ChatRequest, get_response
+from fastapi import FastAPI
 from auth import router as auth_router
 from posts import router as posts_router
+
 from community import router as community_router
 from users import router as users_router
+from fastapi.middleware.cors import CORSMiddleware
+from chatbot import ChatRequest, get_response
 
 app = FastAPI()
 app.add_middleware(
@@ -23,12 +24,13 @@ async def chat(chat_request: ChatRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+app.include_router(community_router, prefix="/community", tags=["Community"])
+app.include_router(posts_router, tags=["Posts"])
+
+app.include_router(users_router, prefix="/users", tags=["Users"])
+
 @app.get("/")
 async def root():
     return {"message": "User Authentication API with FastAPI and MongoDB"}
 
-# Your other routers
-app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
-app.include_router(community_router, prefix="/community", tags=["Community"])
-app.include_router(posts_router, tags=["Posts"])
-app.include_router(users_router, prefix="/users", tags=["Users"])

@@ -33,14 +33,15 @@ def preprocess_text(text):
     return text
 
 async def search_relevant_posts(query):
-    query = preprocess_text(query)
+    # query = preprocess_text(query)
     
     # Fetch the latest 20 posts based on creation date
     posts_cursor = posts_collection.find().sort('creation_date', -1).limit(20)
     posts = []
     post_texts = []
     async for post in posts_cursor:
-        post_content = preprocess_text(post["content"])
+        # post_content = preprocess_text(post["content"])
+        post_content = post["content"]
         posts.append(post)
         post_texts.append(post_content)
     
@@ -52,8 +53,8 @@ async def search_relevant_posts(query):
         post_vectors = vectors[1:]
         similarities = cosine_similarity([query_vector], post_vectors)[0]
         
-        # Select posts with similarity greater than 0.3
-        relevant_posts = [(post, similarity) for post, similarity in zip(posts, similarities) if similarity > 0.3]
+        # Select posts with similarity greater than 0.2
+        relevant_posts = [(post, similarity) for post, similarity in zip(posts, similarities) if similarity > 0.2]
         relevant_posts = sorted(relevant_posts, key=lambda x: x[1], reverse=True)[:5]
         
         return [post["content"] for post, _ in relevant_posts]
@@ -74,7 +75,7 @@ async def get_response(chat_request: ChatRequest):
         # Search for relevant posts in the database
         relevant_posts = await search_relevant_posts(chat_request.text)
         if relevant_posts:
-            response += "\n\nHere are some related posts from our community:\n"
+            response = "\n\nHere are some related posts from our community:\n"
             for post in relevant_posts:
                 response += f"- {post}\n"
 

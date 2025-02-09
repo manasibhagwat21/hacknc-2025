@@ -1,4 +1,3 @@
-/* Scoped Styling for .profile-setup */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 .profile-setup {
@@ -43,7 +42,7 @@ h1{
 .profile-setup .form-container {
   flex: 60%;
   padding: 40px 50px;
-  background: #FFADAD;
+  background: #ffadad;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,17 +52,46 @@ h1{
   animation: slideInRightProfile 1.2s ease-in-out;
 }
 
-.profile-setup h2 {
-  color: #000000;
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-  animation: fadeInProfile 2s ease;
+.profile-setup {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  background: #fcc8c8;
+  animation: gradientAnimationProfile 6s ease infinite;
+  overflow: hidden; /* Prevent scrolling on the main screen */
 }
 
-.form-container{
-  width: 400px;
+.profile-setup .form-container {
+  flex: 60%;
+  padding: 40px 50px;
+  background: #ffadad;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items at the top */
+  align-items: center;
+  border-radius: 0 15px 15px 0;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  animation: slideInRightProfile 1.2s ease-in-out;
+  
+  height: 100vh; /* Full height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #ff6565 transparent; /* Optional styling */
 }
+
+/* For Webkit browsers (Chrome, Safari) */
+.profile-setup .form-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile-setup .form-container::-webkit-scrollbar-thumb {
+  background-color: #ff6565;
+  border-radius: 10px;
+}
+
+.profile-setup .form-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 
 .form-group {
   margin-bottom: 15px;
@@ -78,6 +106,10 @@ h1{
 
 #save:hover{
   background-color: #ff5353;
+}
+
+.enter{
+  margin-bottom: 30px;
 }
 
 .skip{
@@ -137,4 +169,3 @@ h1{
     transform: translateY(0);
   }
 }
-

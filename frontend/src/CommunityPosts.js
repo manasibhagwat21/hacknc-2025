@@ -8,24 +8,22 @@ const CommunityPosts = () => {
     const [error, setError] = useState(null);
     
     // 🔹 Get communityId and communityName from query params
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const communityId = queryParams.get("communityId");
-    const communityName = queryParams.get("communityName");
+    // const location = useLocation();
+    // const queryParams = new URLSearchParams(location.search);
+    const communityId = "adw"
+    const communityName = "adda"
 
     // 🔹 Fetch posts when component mounts or communityId changes
     useEffect(() => {
-        if (communityId) {
             fetchCommunityPosts();
-        }
-    }, [communityId]);
+    }, []);
 
     // 🔹 Function to fetch posts from API
     const fetchCommunityPosts = async () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get(`http://localhost:8000/community/posts/${communityId}`);
+            const response = await axios.get(`http://localhost:8000/posts`);
             setPosts(response.data.posts);
         } catch (err) {
             setError("Failed to load posts.");
@@ -35,34 +33,28 @@ const CommunityPosts = () => {
 
     return (
         <div>
-            <h2>Posts in {communityName}</h2>
+           <div>
+           {posts && posts.length > 0 ? (
+  posts.map(post => (
+    <div key={post.id}>
+      <h2>{post.title}</h2>
+      <p>{post.content}</p>
+      <p>Author ID: {post.author_id}</p>
+      <p>Created At: {new Date(post.created_at).toLocaleString()}</p>
 
-            {loading && <p>Loading posts...</p>}
+      <h3>Comments:</h3>
+      <ul>
+        {post.comments.map(commentId => (
+          <li key={commentId}>Comment ID: {commentId}</li>
+        ))}
+      </ul>
+    </div>
+  ))
+) : (
+  <p>No posts available</p>
+)}
 
-            {posts.length === 0 && !loading && <p>No posts available.</p>}
-
-            <ul>
-                {posts.map((post) => (
-                    <li key={post._id}>
-                        <h3>{post.title}</h3>
-                        <p>{post.content}</p>
-                        <small>Posted by User {post.author_id} on {new Date(post.created_at).toLocaleString()}</small>
-
-                        {post.comments && post.comments.length > 0 && (
-                            <div>
-                                <h4>Comments:</h4>
-                                <ul>
-                                    {post.comments.map((comment, index) => (
-                                        <li key={index}>
-                                            <strong>User {comment.author_id}:</strong> {comment.content}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </li>
-                ))}
-            </ul>
+    </div>
         </div>
     );
 };

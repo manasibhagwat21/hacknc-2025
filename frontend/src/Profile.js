@@ -4,45 +4,50 @@ import './Profile.css';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
-    const user = {
+    const [user, setUser] = useState({});
+    const [invites, setInvites] = useState([]);
+    const userId = localStorage.getItem('userId');
+    const user1 = {
         name: 'John Doe',
         bio: 'A passionate developer always learning new technologies.',
         profilePic: 'https://thumbs.dreamstime.com/b/female-user-profile-avatar-woman-character-screen-saver-emotions-website-mobile-app-design-vector-199086515.jpg' // Replace with actual profile pic URL
     };
 
-    // State to store invites
-    const [invites, setInvites] = useState([]);
-    const userId = localStorage.getItem('userId');
-
-    // Fetch received requests (invites) when the component mounts
     useEffect(() => {
-        const userId = 1; // Replace with actual user ID
-        axios.get(`/requests/received-requests/${userId}`)
+        // Fetch user profile data
+        axios.get(`/user/profile/${userId}`)
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching user profile!", error);
+            });
+    }, [userId]);
+
+    useEffect(() => {
+        // Fetch received requests (invites)
+        axios.get(`http://localhost:8000/requests/received-requests/${userId}`)
             .then(response => {
                 setInvites(response.data);
             })
             .catch(error => {
-                console.error("There was an error fetching the invites!", error);
+                console.error("Error fetching invites!", error);
             });
-    }, []);
+    }, [userId]);
 
-    // Function to handle accepting or declining invites
-    const handleInviteResponse = (requestId, status) => {
-        const data = {
-            sender_id: 1, // Replace with actual sender ID
-            receiver_id: 1, // Replace with actual receiver ID
+    const handleInviteResponse = (senderId, status) => {
+        axios.post(`http://localhost:8000/requests/update-request`, {
+            sender_id: senderId,
+            receiver_id: userId,
             status: status,
-        };
-
-        axios.post('/requests/update-request', data)
-            .then(response => {
-                console.log(response.data.message);
-                // Update the invites list to reflect the changes
-                setInvites(prevInvites => prevInvites.filter(invite => invite.request_id !== requestId));
-            })
-            .catch(error => {
-                console.error("There was an error updating the invite status!", error);
-            });
+        })
+        .then(response => {
+            console.log(response.data.message);
+            setInvites(prevInvites => prevInvites.filter(invite => invite.sender_id !== senderId));
+        })
+        .catch(error => {
+            console.error("Error updating invite status!", error);
+        });
     };
 
     return (
@@ -55,25 +60,22 @@ const Profile = () => {
                 <Link to="/Serviceshare" className="serviceshare-link">SwapServe</Link>
 
                 <div className="profile">
-                    <Link to="/profile" >
-                        <img src={user.profilePic} alt="Profile Avatar" className="profile-avatar" style={{ width: '50px', height: '50px', borderRadius: '50%', border: '1px solid black' }} />
+                <Link to="/profile" >
+                        <img src={user1.profilePic} alt="Profile Avatar" className="profile-avatar" style={{ width: '50px', height: '50px', borderRadius: '50%', border: '1px solid black' }} />
                     </Link>
-                    <span className="username">username</span>
+                    <span className="username">{user.name || 'User'}</span>
                 </div>
                 <Link to="/" className="lo">Log Out </Link>
             </nav>
 
             <div className="profile-page">
-                {/* Sidebar Section */}
                 <div className="sidebar">
                     <div className="profile-info">
-                        <img src={user.profilePic} alt="Profile" className="profile-pic" />
-                        <h2 className="usern">{user.name}</h2>
-                        <p className="bio">{user.bio}</p>
+                    <img src={user1.profilePic} alt="Profile Avatar" className="profile-avatar" style={{ width: '50px', height: '50px', borderRadius: '50%', border: '1px solid black' }} />
+                        <p className="bio">{user.bio || 'No bio available'}</p>
                     </div>
                 </div>
 
-                {/* Main Section */}
                 <div className="main-content">
                     <h2>Your Invites</h2>
                     <div className="invites">
@@ -81,18 +83,18 @@ const Profile = () => {
                             <p>No pending invites.</p>
                         ) : (
                             invites.map((invite) => (
-                                <div key={invite.request_id} className="invite-card">
-                                    <h3>{invite.community}</h3>
-                                    <p>{invite.message}</p>
+                                <div className="invite-card">
+                                    <h3>User Id :{invite.sender_id}  - View Profile</h3>
+                                    <p>Hello, I am willing to barter my services for yours!</p>
                                     <div className="invite-actions">
                                         <button 
                                             className="accept-btn" 
-                                            onClick={() => handleInviteResponse(invite.request_id, 'accepted')}>
+                                            onClick={() => handleInviteResponse(invite.sender_id, 'accepted')}>
                                             Accept
                                         </button>
                                         <button 
                                             className="decline-btn" 
-                                            onClick={() => handleInviteResponse(invite.request_id, 'declined')}>
+                                            onClick={() => handleInviteResponse(invite.sender_id, 'declined')}>
                                             Decline
                                         </button>
                                     </div>

@@ -7,6 +7,7 @@ const Serviceshare = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flip, setFlip] = useState(false);
   const [matches, setMatches] = useState(null);
+  const user_id = localStorage.getItem('userId');
 
   const introLines = [
     "A fun new way to barter services with others!",
@@ -34,7 +35,7 @@ const Serviceshare = () => {
     "Laundry folding", "Gardening", "Massage therapy", "Recycling pick-up", "Carpooling", "Event planning"
   ];
 
-  const userId = localStorage.getItem('userId');
+
 
   const handleServiceClick = (service) => {
     setSelectedServices((prevServices) =>
@@ -62,10 +63,11 @@ const Serviceshare = () => {
 
   const handleRequest = async (receiver_id) => {
     try {
-      await axios.post("http://localhost:8000/requests/send-request", {
+      const res = await axios.post("http://localhost:8000/requests/send-request", {
         sender_id: user_id,
         receiver_id: receiver_id,
       });
+      console.log(res.data.message);
       console.log(`Request sent to user with ID: ${receiver_id}`);
     } catch (error) {
       console.error("Error sending request:", error);

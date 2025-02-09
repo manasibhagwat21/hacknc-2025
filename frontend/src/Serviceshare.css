@@ -1,5 +1,5 @@
 body {
-    background-color: beige;
+    background-color: rgb(245, 220, 227);
     font-family: 'Arial', sans-serif;
   }
 
@@ -21,6 +21,14 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 20px;
+  }
+
+  .lo{
+    color: #000000;
+
+    font-size: larger;
+    font-weight: bold;
+    background-color: transparent;
   }
   
   .intro-section {
@@ -65,7 +73,7 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%; /* Circular shape */
-    background: #4C9B9B; /* Color for styling */
+    background: #ff8c7c; /* Color for styling */
     color: white;
     font-size: 20px;
     text-align: center;
@@ -75,7 +83,7 @@ body {
   
   /* Back Side of the Card */
   .flip-card-back {
-    background: #3A7D7D;
+    background: #ff523b;
     transform: rotateY(180deg); /* Flip the back */
   }
   
@@ -91,7 +99,7 @@ body {
   
   .service-section h2 {
     font-size: 50px;
-    color: #3A7D7D;
+    color:  #000000;
 
   }
   
@@ -106,7 +114,7 @@ body {
   }
   
   .bubble {
-    background-color: #7DD2D2;
+    background-color: #fb9588;
     color: white;
     padding: 10px 15px;
     border-radius: 20px;
@@ -116,19 +124,19 @@ body {
   }
   
   .bubble:hover {
-    background-color: #4C9B9B;
+    background-color:  #fa6854;
     transform: scale(1.1);
   }
   
   .bubble.selected {
-    background-color: #3A7D7D;
+    background-color: #ff523b;
     font-weight: bold;
   }
   
   .enter{
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #3A7D7D;
+    background-color: #ff988a;
     color: white;
     border: none;
     border-radius: 5px;
@@ -138,7 +146,7 @@ body {
   }
 
     .enter:hover {
-        background-color: #4C9B9B;
+        background-color:  #c5756b;
     }
 
     .matches-section {

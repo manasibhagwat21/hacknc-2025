@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr
 from typing import List, Optional, Literal
 from bson import ObjectId
+from datetime import datetime
 
 class UserCreate(BaseModel):
     id: Optional[str] = None  
@@ -46,3 +47,24 @@ class UpdateRequestStatus(BaseModel):
     sender_id: int
     receiver_id: int
     status: Literal["accepted", "rejected","pending"]
+    
+# Pydantic models for posts
+class PostCreate(BaseModel):
+    title: str
+    content: str
+    author_id: str  
+
+class PostOut(PostCreate):
+    id: str
+    created_at: datetime
+    comments: List[str] = [] 
+
+# Pydantic models for comments
+class CommentCreate(BaseModel):
+    content: str
+    author_id: str
+    post_id: str
+
+class CommentOut(CommentCreate):
+    id: str
+    created_at: datetime

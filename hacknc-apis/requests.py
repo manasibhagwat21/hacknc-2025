@@ -5,11 +5,14 @@ from database import users_collection, database
 from bson import ObjectId
 from models import MatchRequest, UpdateRequestStatus
 from database import requests_collection
+from datetime import datetime
 
 router = APIRouter()
 
 @router.post("/send-request")
 async def send_match_request(data: MatchRequest):
+    if data.meeting_date <= datetime.utcnow():
+        raise HTTPException(status_code=400, detail="Meeting date must be in the future")
     sender = await users_collection.find_one({"id": data.sender_id})
     receiver = await users_collection.find_one({"id": data.receiver_id})
 
@@ -29,6 +32,7 @@ async def send_match_request(data: MatchRequest):
     result = await requests_collection.insert_one({
         "sender_id": data.sender_id,
         "receiver_id": data.receiver_id,
+        "meeting_date": data.meeting_date.isoformat(),
         "status": "pending"
     })
 

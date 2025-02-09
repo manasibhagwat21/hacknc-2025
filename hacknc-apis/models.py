@@ -1,8 +1,9 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from typing import List, Optional, Literal
 from bson import ObjectId
 from datetime import datetime
 
+#Users
 class UserCreate(BaseModel):
     id: Optional[str] = None  
     username: str
@@ -25,6 +26,7 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+#Community
 class Community(BaseModel):
     name: str
     description: Optional[str] = None
@@ -35,20 +37,24 @@ class JoinCommunityRequest(BaseModel):
     user_id: int  
     community_name: str 
 
+#Skills
 class UserSkillsUpdate(BaseModel):
     user_id: int 
     services: List[str]  
 
+#Requests
 class MatchRequest(BaseModel):
     sender_id: int
     receiver_id: int
+    meeting_date: datetime 
+
 
 class UpdateRequestStatus(BaseModel):
     sender_id: int
     receiver_id: int
     status: Literal["accepted", "rejected","pending"]
     
-# Pydantic models for posts
+#Posts
 class PostCreate(BaseModel):
     title: str
     content: str
@@ -59,7 +65,7 @@ class PostOut(PostCreate):
     created_at: datetime
     comments: List[str] = [] 
 
-# Pydantic models for comments
+#Post Comments
 class CommentCreate(BaseModel):
     content: str
     author_id: str

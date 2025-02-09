@@ -2,8 +2,9 @@ from fastapi import FastAPI
 from auth import router as auth_router
 from community import router as community_router
 from users import router as users_router
-from requests import router as requests_router
+from sharereq import router as requests_router
 from posts import router as posts_router
+from chatbot import router as chatbot_router
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -21,6 +22,7 @@ app.include_router(community_router, prefix="/community", tags=["Community"])
 app.include_router(users_router, prefix="/users", tags=["Users"])
 app.include_router(requests_router, prefix="/requests", tags=["Requests"])
 app.include_router(posts_router, tags=["Posts"])
+app.include_router(chatbot_router, tags=["Chatbot"])
 
 
 @app.get("/")

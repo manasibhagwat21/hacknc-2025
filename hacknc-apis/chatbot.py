@@ -5,12 +5,13 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import nltk
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import re
 
-# Download stopwords if not already done
+# Download necessary NLTK resources
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
-stop_words = set(stopwords.words('english'))
 
 # Initialize the DialoGPT model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium")
@@ -26,22 +27,21 @@ client = AsyncIOMotorClient(MONGO_URL)
 database = client[DB_NAME]
 posts_collection = database["posts"]
 
-def preprocess_text(text):
-    # Remove stop words and non-alphanumeric characters
-    text = re.sub(r'\W', ' ', text)
-    text = ' '.join(word for word in text.split() if word.lower() not in stop_words)
-    return text
+def extract_verbs_nouns(text):
+    words = word_tokenize(text)
+    tagged_words = nltk.pos_tag(words)
+    verbs_nouns = [word for word, pos in tagged_words if pos.startswith('VB') or pos.startswith('NN')]
+    return ' '.join(verbs_nouns)
 
-async def search_relevant_posts(query):
-    # query = preprocess_text(query)
+async def search_relevant_posts(query: str):
+    query = extract_verbs_nouns(query)
     
     # Fetch the latest 20 posts based on creation date
     posts_cursor = posts_collection.find().sort('creation_date', -1).limit(20)
     posts = []
     post_texts = []
     async for post in posts_cursor:
-        # post_content = preprocess_text(post["content"])
-        post_content = post["content"]
+        post_content = extract_verbs_nouns(post["content"])
         posts.append(post)
         post_texts.append(post_content)
     
@@ -53,8 +53,8 @@ async def search_relevant_posts(query):
         post_vectors = vectors[1:]
         similarities = cosine_similarity([query_vector], post_vectors)[0]
         
-        # Select posts with similarity greater than 0.2
-        relevant_posts = [(post, similarity) for post, similarity in zip(posts, similarities) if similarity > 0.2]
+        # Select posts with similarity greater than 0.3
+        relevant_posts = [(post, similarity) for post, similarity in zip(posts, similarities) if similarity > 0.25]
         relevant_posts = sorted(relevant_posts, key=lambda x: x[1], reverse=True)[:5]
         
         return [post["content"] for post, _ in relevant_posts]
@@ -82,3 +82,6 @@ async def get_response(chat_request: ChatRequest):
         return {"response": response}
     except Exception as e:
         raise Exception(f"Error generating response: {e}")
+
+# Ensure to update forward references
+ChatRequest.update_forward_refs()

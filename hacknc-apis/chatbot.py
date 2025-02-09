@@ -26,21 +26,21 @@ client = AsyncIOMotorClient(MONGO_URL)
 database = client[DB_NAME]
 posts_collection = database["posts"]
 
-async def preprocess_text(text):
+def preprocess_text(text):
     # Remove stop words and non-alphanumeric characters
     text = re.sub(r'\W', ' ', text)
     text = ' '.join(word for word in text.split() if word.lower() not in stop_words)
     return text
 
 async def search_relevant_posts(query):
-    query = await preprocess_text(query)
+    query = preprocess_text(query)
     
     # Fetch the latest 20 posts based on creation date
     posts_cursor = posts_collection.find().sort('creation_date', -1).limit(20)
     posts = []
     post_texts = []
     async for post in posts_cursor:
-        post_content = await preprocess_text(post["content"])
+        post_content = preprocess_text(post["content"])
         posts.append(post)
         post_texts.append(post_content)
     

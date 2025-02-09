@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import List, Optional
+from typing import List, Optional, Literal
 from bson import ObjectId
 
 class UserCreate(BaseModel):
@@ -37,3 +37,12 @@ class JoinCommunityRequest(BaseModel):
 class UserSkillsUpdate(BaseModel):
     user_id: int 
     services: List[str]  
+
+class MatchRequest(BaseModel):
+    sender_id: int
+    receiver_id: int
+
+class UpdateRequestStatus(BaseModel):
+    sender_id: int
+    receiver_id: int
+    status: Literal["accepted", "rejected","pending"]

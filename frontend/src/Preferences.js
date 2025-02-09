@@ -82,7 +82,7 @@ const Preferences = () => {
             style={{ backgroundImage: `url(${questions[index].leftImage})` }}
           >
             <div className="overlay"></div>
-            <span>{questions[index].left}</span>
+            <span className="spann">{questions[index].left}</span>
           </button>
 
           <button 
@@ -91,7 +91,7 @@ const Preferences = () => {
             style={{ backgroundImage: `url(${questions[index].rightImage})` }}
           >
             <div className="overlay"></div>
-            <span>{questions[index].right}</span>
+            <span className="spann">{questions[index].right}</span>
           </button>
         </div>
       </div>

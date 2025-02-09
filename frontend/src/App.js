@@ -12,19 +12,19 @@ import Serviceshare from './Serviceshare';
 
 const App = () => {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<LandingPage/>} />
-    //     <Route path="/signup" element={<SignUp />} />
-    //     <Route path="/login" element={<Login />} />
-    //     <Route path="/preferences" element={<Preferences />} />
-    //     <Route path="/home" element={<Home />} />
-    //     <Route path="/profilesetup" element={<ProfileSetup />} />
-    //     <Route path='/community' element={<Community />} />
-    //   </Routes>
-    // </Router>
-
-    <Serviceshare />
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/preferences" element={<Preferences />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/profilesetup" element={<ProfileSetup />} />
+        <Route path='/community' element={<Community />} />
+        <Route path='/community-posts' element={<CommunityPosts />} />
+        <Route path='/serviceshare' element={<Serviceshare />} />
+      </Routes>
+    </Router>
   );
 };
 

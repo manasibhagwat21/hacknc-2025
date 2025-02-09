@@ -80,6 +80,20 @@ h1{
   background-color: #ff5353;
 }
 
+.skip{
+  color: rgb(66, 65, 65);
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  background-color: transparent;
+  border: none;
+  text-align: right;
+}
+
+.skip:hover{
+  color: #000000;
+  background-color: transparent;
+}
+
 /* .btn{
   width: 500px !important;
   padding: 10px;

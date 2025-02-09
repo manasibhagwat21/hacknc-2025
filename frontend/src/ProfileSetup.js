@@ -100,6 +100,7 @@ const ProfileSetup = () => {
           </button>
           </Link>
         </form>
+        <button className="skip" onClick={() => navigate("/preferences")}>Skip →</button>
       </div>
     </div>
   );

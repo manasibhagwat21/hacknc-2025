@@ -75,3 +75,8 @@ class CommentCreate(BaseModel):
 class CommentOut(CommentCreate):
     id: str
     created_at: datetime
+    
+class UpdateProfileRequest(BaseModel):
+    user_id: int
+    profile_pic: str = None  # Optional profile picture URL
+    bio: str = None  # Optional bio

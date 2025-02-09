@@ -1,10 +1,11 @@
-from fastapi import APIRouter, HTTPException, Depends
-from models import UserCreate, UserLogin, Token, Community , JoinCommunityRequest, UserSkillsUpdate
+from fastapi import APIRouter, HTTPException, Depends, File, UploadFile, Form
+from models import UserCreate, UserLogin, Token, Community , JoinCommunityRequest, UserSkillsUpdate, UpdateProfileRequest
 from database import users_collection, community_collection
 from utils import hash_password, verify_password, create_access_token
 from datetime import timedelta
 import datetime
 from bson import ObjectId
+import os
 
 router = APIRouter()
 
@@ -84,3 +85,35 @@ async def find_matches(user_id: int):
     }
 
     return matched_users
+
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+@router.post("/profile-setup/{user_id}")
+async def update_user_profile(
+    user_id: int,
+    file: UploadFile = File(None), 
+    bio: str = Form(None)  
+):
+    user = await users_collection.find_one({"id": user_id})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    update_data = {}
+
+    # ✅ Handle file upload if provided
+    if file:
+        file_path = f"{UPLOAD_DIR}/user_{user_id}_{file.filename}"
+        with open(file_path, "wb") as buffer:
+            buffer.write(await file.read())
+        update_data["profile_pic"] = f"/uploads/{file.filename}"  # ✅ Store relative path
+
+    # ✅ Handle bio update if provided
+    if bio:
+        update_data["bio"] = bio.strip()
+
+    # ✅ Update MongoDB
+    if update_data:
+        await users_collection.update_one({"id": user_id}, {"$set": update_data})
+
+    return {"message": "Profile updated successfully", **update_data}

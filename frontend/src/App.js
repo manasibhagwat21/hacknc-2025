@@ -9,6 +9,7 @@ import Home from './Home';
 import Community from './Community';
 import CommunityPosts from './CommunityPosts';
 import Serviceshare from './Serviceshare';
+import Profile from './Profile'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/community' element={<Community />} />
         <Route path='/community-posts' element={<CommunityPosts />} />
         <Route path='/serviceshare' element={<Serviceshare />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </Router>
   );

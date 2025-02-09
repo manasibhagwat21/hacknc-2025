@@ -24,20 +24,24 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setMessage('');
+//comment out the following code to prevent the error while doing frontend
 
-//     try {
-//       const response = await axios.post('http://localhost:8000/auth/signup', formData);
-//       setMessage(response.data.message);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+
+    try {
+      const response = await axios.post('http://localhost:8000/auth/signup', formData);
+      setMessage(response.data.message);
       
-//       // Redirect to Preferences Page after successful signup
-//       navigate('/profilesetup');
-//     } catch (error) {
-//       setMessage(error.response?.data?.detail || 'Error signing up');
-//     }
-//   };
+      // Redirect to Preferences Page after successful signup
+      navigate('/profilesetup');
+    } catch (error) {
+      setMessage(error.response?.data?.detail || 'Error signing up');
+    }
+  };
+
+  //comment out the following code to prevent the error while doing frontend
 
   return (
     
@@ -56,8 +60,8 @@ const SignUp = () => {
         <div className="sign-up">
           <h2>Create an Account</h2>
           {message && <p className="message">{message}</p>}
-          <form>
-          {/* <form onSubmit={handleSubmit}> */}
+          {/* <form> */}
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <input

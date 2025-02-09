@@ -1,48 +1,70 @@
 import React, { useState } from "react";
 import "./ProfileSetup.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const ProfileSetup = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [bio, setBio] = useState("");
+  const [previewURL, setPreviewURL] = useState("");
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePic(reader.result);
-      };
-      reader.readAsDataURL(file);
+      setProfilePic(file); // Store actual file for backend
+      setPreviewURL(URL.createObjectURL(file)); // Temporary preview URL
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const profileData = {
-      profile_pic: profilePic,
-      bio,
-    };
-    console.log("Profile Data:", profileData);
+    const formData = new FormData();
+
+    if (profilePic) {
+      formData.append("profile_pic", profilePic); // Append actual file
+    }
+    if (bio) {
+      formData.append("bio", bio);
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8000/profile/setup", formData, { //girl check url
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("Profile saved:", response.data);
+      navigate("/preferences");
+    } catch (error) {
+      console.error("Error saving profile:", error.response?.data || error.message);
+    }
   };
 
   return (
     <div className="profile-setup">
       {/* Left 40% - Image Display */}
       <div className="image-container">
-        <img
-          src={profilePic || "https://png.pngtree.com/element_our/20190529/ourmid/pngtree-user-cartoon-avatar-pattern-flat-avatar-image_1200091.jpg"}
+        <img 
+          style={{ borderRadius: "50%" }}
+          src={previewURL || "https://cdna.artstation.com/p/assets/images/images/040/951/926/large/maddie_creates-jj-ver2.jpg?1630351796"}
           alt="Profile"
-          className="profile-preview"
+          className="profile-preview" 
         />
       </div>
 
       {/* Right 60% - Form */}
       <div className="form-container">
-        <h2>Set Up Your Profile</h2>
+        <h1>Set Up Your Profile</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="profilePic">Upload Profile Picture</label>
             <input
+              style={{
+                padding: "10px",
+                borderRadius: "5px",
+                backgroundColor: "white",
+                border: "1px solid #ccc",
+              }}
               type="file"
               id="profilePic"
               accept="image/*"
@@ -57,9 +79,19 @@ const ProfileSetup = () => {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               placeholder="Tell us about yourself..."
+              style={{
+                padding: "10px",
+                width: "400px",
+                height: "200px",
+                borderRadius: "5px",
+                backgroundColor: "white",
+                border: "1px solid #ccc",
+              }}
             />
           </div>
-          <button type="submit" className="btn">Save</button>
+          <button type="submit" id="save" className="form-group">
+            Save
+          </button>
         </form>
       </div>
     </div>

@@ -13,7 +13,8 @@ class UserCreate(BaseModel):
     bio: Optional[str] = None
     communities: List[str] = []  
     servicesOffer: List[str] = []  
-    servicesNeed: List[str] = []  
+    servicesNeed: List[str] = []
+    preferences: List[str] = []
     
 class UserLogin(BaseModel):
     email: EmailStr

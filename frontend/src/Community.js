@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Community = () => {
     const [joinedCommunities, setJoinedCommunities] = useState([]);
     const [availableCommunities, setAvailableCommunities] = useState([]);
-    const userId = 6; // Replace with actual user ID
+    const userId = localStorage.getItem('userId');
     const [currentIndex, setCurrentIndex] = useState(0);
     const communityContainerRef = useRef(null);
     const navigate = useNavigate(); 

@@ -34,9 +34,10 @@ const SignUp = () => {
     try {
       const response = await axios.post('http://localhost:8000/auth/signup', formData);
       setMessage(response.data.message);
-      
       // Redirect to Preferences Page after successful signup
-      navigate('/profilesetup');
+      if(response.data){
+        navigate('/profilesetup');
+      }
     } catch (error) {
       setMessage(error.response?.data?.detail || 'Error signing up');
     }

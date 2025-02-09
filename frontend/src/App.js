@@ -10,10 +10,12 @@ import Community from './Community';
 import CommunityPosts from './CommunityPosts';
 import Serviceshare from './Serviceshare';
 import Profile from './Profile'
+import ChatbotWrapper from './ChatbotWrapper';
 
 const App = () => {
   return (
     <Router>
+      <ChatbotWrapper>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/signup" element={<SignUp />} />
@@ -26,7 +28,9 @@ const App = () => {
         <Route path='/serviceshare' element={<Serviceshare />} />
         <Route path='/profile' element={<Profile />} />
       </Routes>
+      </ChatbotWrapper>
     </Router>
+
   );
 };
 

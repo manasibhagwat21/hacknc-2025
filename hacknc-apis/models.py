@@ -40,6 +40,7 @@ class PostCreate(BaseModel):
     title: str
     content: str
     author_id: str  
+    community_id: str
 
 class PostOut(PostCreate):
     id: str

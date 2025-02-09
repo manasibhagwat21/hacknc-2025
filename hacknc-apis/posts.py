@@ -15,6 +15,7 @@ def post_helper(post: dict) -> dict:
         "title": post["title"],
         "content": post["content"],
         "author_id": post["author_id"],
+        "community_id": post["community_id"],
         "created_at": post["created_at"],
         "comments": post.get("comments", []),
     }

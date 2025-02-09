@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./ProfileSetup.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const ProfileSetup = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [bio, setBio] = useState("");
   const [previewURL, setPreviewURL] = useState("");
+  const userId = 6; // Replace with actual user ID
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
@@ -30,14 +31,17 @@ const ProfileSetup = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/profile/setup", formData, { //girl check url
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log("Profile saved:", response.data);
-      navigate("/preferences");
-    } catch (error) {
-      console.error("Error saving profile:", error.response?.data || error.message);
-    }
+            const response = await axios.post(
+                `http://localhost:8000/users/profile-setup/${userId}`,
+                formData,
+                { headers: { "Content-Type": "multipart/form-data" } }
+            );
+      
+            console.log(response.data);
+            setProfilePic(response.data.profile_pic); // Update UI with new image
+        } catch (error) {
+            console.error("Error uploading profile picture:", error);
+        }
   };
 
   return (
@@ -89,9 +93,12 @@ const ProfileSetup = () => {
               }}
             />
           </div>
+          <Link to="/preferences">
+          {/* have to remove link */}
           <button type="submit" id="save" className="form-group">
             Save
           </button>
+          </Link>
         </form>
       </div>
     </div>

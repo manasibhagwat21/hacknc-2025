@@ -12,6 +12,7 @@ const SignUp = () => {
     profile_pic: "",    
     bio: "",
     communities: [],
+    preferences: [],
     servicesOffer: [],
     servicesNeed: [] 
   });
@@ -46,7 +47,7 @@ const SignUp = () => {
   return (
     
     <div className='container'>
-      <nav className="navbar">
+      <nav className="navb">
           <div className="logo">
             <img src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-shake-hands-png-image_8742463.png" alt="Handshake" className="logo-img" /> {/* Add your placeholder image here */}
           </div>
@@ -95,7 +96,8 @@ const SignUp = () => {
                 required
               />
             </div>
-            <Link to="/profilesetup">
+            <Link to="/profilesetup"> 
+            {/* have to remove this link */}
             <button type="submit" className="btn">Sign Up</button>
             </Link>
           </form>

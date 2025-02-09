@@ -22,7 +22,7 @@ const LandingPage = () => {
   return (
     <div className="LandingPage">
       {/* Navbar */}
-      <nav className="navbar">
+      <nav className="navb">
         <div className="logo">
           <img src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-shake-hands-png-image_8742463.png" alt="Handshake" className="logo-img" /> {/* Add your placeholder image here */}
         </div>

@@ -1,0 +1,80 @@
+.preferences-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right,  #ffa0a0, #d5ffad);
+}
+
+.card {
+    width: 75%;
+    height: 70%;
+    max-width: 1100px; /* Increased max width */
+    /* background: white; */
+    padding: 30px; /* More padding for better layout */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+}
+
+.question-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.swipe-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.option-btn {
+    width: 45%;
+    height: 450px; /* Increased size for a more visual experience */
+    font-size: 2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    /* text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span{
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    z-index: 2;
+}
+
+.option-btn .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); /* Dark fade overlay */
+    transition: background 0.3s ease-in-out;
+}
+
+.option-btn:hover .overlay {
+    background: rgba(0, 0, 0, 0.3); /* Reduce darkness on hover */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}

@@ -1,0 +1,114 @@
+/* Available Communities Container with Arrows */
+.available-communities-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+
+.navb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0px 2%;
+    background-color: #d5ffad;
+    position: relative;
+    z-index: 3;
+  }
+
+.arrow-button {
+    background-color:#d5ffad;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.arrow-button.prev {
+    left: 10px;
+}
+
+.arrow-button.next {
+    right: 10px;
+}
+
+/* Available Communities Section */
+.available-communities {
+    display: flex;
+    gap: 20px;
+    background-color: #8fa978;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* For Firefox */
+}
+
+/* Available Community Card */
+.available-community-card {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #edfddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    /* padding: 15px; */
+    box-sizing: border-box;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease-in-out;
+}
+
+.available-community-card:hover {
+    transform: scale(1.15);
+}
+
+.card-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: #555;
+    border-bottom: 3px solid #555;
+}
+
+.card-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+    text-align: left;
+    padding: 10px;
+}
+
+.card-button {
+    color: rgb(0, 0, 0);
+    bottom: 30px;
+    background-color: transparent;
+}
+
+.card-button:hover {
+    background-color:#8fa978;
+}
+
+.your-communities{
+    background-color:#8fa978;
+}
+
+.your-community-card{
+    margin: 5px;
+    background-color: #e2fcc9;
+    padding: 10px;
+    border-radius: 10px;
+}

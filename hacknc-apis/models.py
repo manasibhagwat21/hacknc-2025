@@ -26,6 +26,7 @@ class UserInDB(UserCreate):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user_id:int
 
 #Community
 class Community(BaseModel):
@@ -47,7 +48,6 @@ class UserSkillsUpdate(BaseModel):
 class MatchRequest(BaseModel):
     sender_id: int
     receiver_id: int
-    meeting_date: datetime 
 
 
 class UpdateRequestStatus(BaseModel):

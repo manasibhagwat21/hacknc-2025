@@ -27,8 +27,12 @@ async def signup(user: UserCreate):
 
     # Generate access token
     access_token = create_access_token({"sub": user.email}, expires_delta=timedelta(minutes=30))
+    db_user = await users_collection.find_one({"email": user.email})
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    print(db_user)
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer","user_id": db_user["id"]}
 
 #API for login
 @router.post("/login", response_model=Token)
@@ -38,5 +42,5 @@ async def login(user: UserLogin):
         raise HTTPException(status_code=400, detail="Invalid credentials")
 
     access_token = create_access_token({"sub": user.email}, expires_delta=timedelta(minutes=30))
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer","user_id": db_user["id"]}
 
